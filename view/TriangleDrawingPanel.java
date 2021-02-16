@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -60,8 +61,6 @@ public class TriangleDrawingPanel {
 
         canvas = new TriangleCanvas(this);
         cp.add(BorderLayout.CENTER, canvas);
-        TriangleMouseEvent mouseEvent = new TriangleMouseEvent();
-        canvas.addMouseListener(mouseEvent);
 
         // attach event listener
         TriangleEventListener listener = new TriangleEventListener(this);
@@ -70,6 +69,7 @@ public class TriangleDrawingPanel {
         redButton.addActionListener(listener);
         yellowButton.addActionListener(listener);
         blueButton.addActionListener(listener);
+        canvas.addMouseListener(listener);
     }
 
     public JButton getExitButton() {
@@ -95,9 +95,13 @@ public class TriangleDrawingPanel {
     public JFrame getWindow() {
         return window;
     }
+
+    public TriangleCanvas getCanvas() {
+        return canvas;
+    }
 }
 
-class TriangleMouseEvent implements MouseListener {
+/*class TriangleMouseEvent implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -124,4 +128,14 @@ class TriangleMouseEvent implements MouseListener {
         System.out.println("Exited: " + e.getX() + ", " + e.getY());
     }
 
-}
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        System.out.println("Dragged: " + e.getX() + ", " + e.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        System.out.println("Moved: " + e.getX() + ", " + e.getY());
+    }
+
+}*/
